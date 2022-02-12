@@ -8,7 +8,7 @@ spring:
             maximum-pool-size: 25
             minimum-idle: 10
             leak-detection-threshold: 2100
-            connection-test-query: "SELECT * FROM dbo.People"
+            connection-test-query: "SELECT 1"
     jpa:
         hibernate:
             ddl-auto: none

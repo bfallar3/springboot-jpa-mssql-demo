@@ -27,9 +27,13 @@ public class PersonController {
 
    @GetMapping(value = "/mdr/{agencyId}", produces = "application/json")
    public List<MdrReportResponse> generateMdr(@PathVariable("agencyId") Long agencyId) {
-      StoredProcedureQuery sp_generate_mdr_submissions_per_agency = entityManager.createStoredProcedureQuery("sp_generate_mdr_submissions_per_agency", MdrReportResponse.class);
-      sp_generate_mdr_submissions_per_agency.registerStoredProcedureParameter("AgencyId", Long.class, ParameterMode.IN);
-      sp_generate_mdr_submissions_per_agency.setParameter("AgencyId", agencyId);
+      final String procedureName = "sp_generate_mdr_submissions_per_agency";
+      final String param_agency_id = "AgencyId";
+
+      StoredProcedureQuery sp_generate_mdr_submissions_per_agency =
+              entityManager.createStoredProcedureQuery(procedureName, MdrReportResponse.class)
+               .registerStoredProcedureParameter(param_agency_id, Long.class, ParameterMode.IN).setParameter(param_agency_id, agencyId);
+
       sp_generate_mdr_submissions_per_agency.execute();
 
       List<MdrReportResponse> resultList = (List<MdrReportResponse>)sp_generate_mdr_submissions_per_agency.getResultList();
