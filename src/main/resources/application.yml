@@ -2,7 +2,8 @@ spring:
     datasource:
         driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
         password: P@ssw0rd123!
-        url: jdbc:sqlserver://localhost;databaseName=PNP_SOSIA_v1_0_0
+        #url: jdbc:sqlserver://host.docker.internal:1433;databaseName=PNP_SOSIA_v1_0_0 #Localhost
+        url: jdbc:sqlserver://host.docker.internal:1433;databaseName=PNP_SOSIA_v1_0_0 #Docker
         username: sa
         hikari:
             maximum-pool-size: 25
